@@ -4,7 +4,6 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-
     "content-hash": "0fe02967618b6ee54572c79b43d09b09",
     "packages": [
         {
@@ -22,7 +21,6 @@
                 "reference": "b9c31def6a83f84b4d4a40d35996d375755f0e08",
                 "shasum": ""
             },
-
             "require": {
                 "php": ">=5.5.9",
                 "symfony/http-foundation": "~2.7|~3.0|~4.0|~5.0",
