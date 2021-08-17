@@ -78,6 +78,7 @@ return [
             'sslmode' => 'prefer',
         ],
 
+
         'sqlsrv' => [
             'driver' => 'sqlsrv',
             'url' => env('DATABASE_URL'),
@@ -89,6 +90,7 @@ return [
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
+
         ],
 
     ],
