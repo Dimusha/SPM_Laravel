@@ -34,6 +34,8 @@ class CreatePostCommentsTable extends Migration
      */
     public function down()
     {
+
         Schema::dropIfExists('post_comments');
+        
     }
 }
