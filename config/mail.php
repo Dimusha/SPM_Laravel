@@ -47,6 +47,7 @@ return [
 
         'ses' => [
             'transport' => 'ses',
+
         ],
 
         'mailgun' => [
@@ -60,6 +61,7 @@ return [
         'sendmail' => [
             'transport' => 'sendmail',
             'path' => '/usr/sbin/sendmail -bs',
+            
         ],
 
         'log' => [
