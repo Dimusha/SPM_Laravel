@@ -15,7 +15,7 @@
                 "url": "https://github.com/asm89/stack-cors.git",
                 "reference": "b9c31def6a83f84b4d4a40d35996d375755f0e08"
             },
-            
+
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/asm89/stack-cors/zipball/b9c31def6a83f84b4d4a40d35996d375755f0e08",

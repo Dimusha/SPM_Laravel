@@ -23,7 +23,7 @@
         "srmklive/paypal": "~1.0",
         "unisharp/laravel-filemanager": "^2.1"
     },
-    
+
     "require-dev": {
         "facade/ignition": "^2.0",
         "fzaninotto/faker": "^1.9.1",
