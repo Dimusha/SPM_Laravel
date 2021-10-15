@@ -109,9 +109,4 @@ class AdminController extends Controller
      return view('backend.index')->with('course', json_encode($array));
     }
 
-    // public function activity(){
-    //     return Activity::all();
-    //     $activity= Activity::all();
-    //     return view('backend.layouts.activity')->with('activities',$activity);
-    // }
 }

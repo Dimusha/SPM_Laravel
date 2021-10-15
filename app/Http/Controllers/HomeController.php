@@ -12,22 +12,15 @@ use Hash;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+    // Create a new controller instance.
+    
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-
+    // Show the application dashboard.
+   
 
     public function index(){
         return view('user.index');
@@ -101,13 +94,8 @@ class HomeController extends Controller
         return view('user.review.edit')->with('review',$review);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Update the specified resource in storage.
+    
     public function productReviewUpdate(Request $request, $id)
     {
         $review=ProductReview::find($id);
@@ -128,12 +116,8 @@ class HomeController extends Controller
         return redirect()->route('user.productreview.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Remove the specified resource from storage.
+    
     public function productReviewDelete($id)
     {
         $review=ProductReview::find($id);
@@ -181,13 +165,8 @@ class HomeController extends Controller
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Update the specified resource in storage.
+    
     public function userCommentUpdate(Request $request, $id)
     {
         $comment=PostComment::find($id);

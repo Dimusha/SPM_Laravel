@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Shipping;
+use App\Models\CardDetails;
 use App\User;
 use PDF;
 use Notification;
@@ -15,33 +16,23 @@ use App\Notifications\StatusNotification;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // Display a listing of the resource.
+
     public function index()
     {
         $orders=Order::orderBy('id','DESC')->paginate(10);
         return view('backend.order.index')->with('orders',$orders);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // Show the form for creating a new resource.
+
     public function create()
     {
-        //
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    // Store a newly created resource in storage.
+
     public function store(Request $request)
     {
         $this->validate($request,[
@@ -60,33 +51,6 @@ class OrderController extends Controller
             request()->session()->flash('error','Cart is Empty !');
             return back();
         }
-        // $cart=Cart::get();
-        // // return $cart;
-        // $cart_index='ORD-'.strtoupper(uniqid());
-        // $sub_total=0;
-        // foreach($cart as $cart_item){
-        //     $sub_total+=$cart_item['amount'];
-        //     $data=array(
-        //         'cart_id'=>$cart_index,
-        //         'user_id'=>$request->user()->id,
-        //         'product_id'=>$cart_item['id'],
-        //         'quantity'=>$cart_item['quantity'],
-        //         'amount'=>$cart_item['amount'],
-        //         'status'=>'new',
-        //         'price'=>$cart_item['price'],
-        //     );
-
-        //     $cart=new Cart();
-        //     $cart->fill($data);
-        //     $cart->save();
-        // }
-
-        // $total_prod=0;
-        // if(session('cart')){
-        //         foreach(session('cart') as $cart_items){
-        //             $total_prod+=$cart_items['quantity'];
-        //         }
-        // }
 
         $order=new Order();
         $order_data=$request->all();
@@ -146,17 +110,13 @@ class OrderController extends Controller
         }
         Cart::where('user_id', auth()->user()->id)->where('order_id', null)->update(['order_id' => $order->id]);
 
-        // dd($users);        
+        // dd($users);
         request()->session()->flash('success','Your product successfully placed in order');
         return redirect()->route('home');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Display the specified resource.
+
     public function show($id)
     {
         $order=Order::find($id);
@@ -164,25 +124,16 @@ class OrderController extends Controller
         return view('backend.order.show')->with('order',$order);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Show the form for editing the specified resource.
+
     public function edit($id)
     {
         $order=Order::find($id);
         return view('backend.order.edit')->with('order',$order);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Update the specified resource in storage.
+
     public function update(Request $request, $id)
     {
         $order=Order::find($id);
@@ -209,12 +160,8 @@ class OrderController extends Controller
         return redirect()->route('order.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Remove the specified resource from storage.
+
     public function destroy($id)
     {
         $order=Order::find($id);
@@ -250,17 +197,17 @@ class OrderController extends Controller
             elseif($order->status=="process"){
                 request()->session()->flash('success','Your order is under processing please wait.');
                 return redirect()->route('home');
-    
+
             }
             elseif($order->status=="delivered"){
                 request()->session()->flash('success','Your order is successfully delivered.');
                 return redirect()->route('home');
-    
+
             }
             else{
                 request()->session()->flash('error','Your order canceled. please try again');
                 return redirect()->route('home');
-    
+
             }
         }
         else{
@@ -303,5 +250,28 @@ class OrderController extends Controller
             $data[$monthName] = (!empty($result[$i]))? number_format((float)($result[$i]), 2, '.', '') : 0.0;
         }
         return $data;
+    }
+
+    // Store a newly created card details.
+
+    public function storeCardDetails(Request $request)
+    {
+        // return $request->all();
+        $this->validate($request,[
+            'card_number'=>'required|numeric',
+            'expiry_date'=>'required|date',
+            'cvc'=>'required|numeric'
+
+        ]);
+        $data=$request->all();
+        $status=CardDetails::create($data);
+        if($status){
+            request()->session()->flash('success','Card Details Successfully added');
+        }
+        else{
+            request()->session()->flash('error','Please try again!!');
+        }
+        request()->session()->flash('success','Your product successfully placed in order');
+        return redirect()->route('home');
     }
 }

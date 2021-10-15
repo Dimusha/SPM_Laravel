@@ -15,11 +15,8 @@ class MessageSent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
+    // Create a new event instance.
+    
     public $message;
     public function __construct($message)
     {
@@ -28,11 +25,8 @@ class MessageSent implements ShouldBroadcast
         $this->message=$message;
     }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return \Illuminate\Broadcasting\Channel|array
-     */
+        // Get the channels the event should broadcast on.
+
     public function broadcastOn()
     {
         return new Channel('message');
